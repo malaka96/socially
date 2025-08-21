@@ -1,0 +1,1 @@
+const minWebWidth = 550;
