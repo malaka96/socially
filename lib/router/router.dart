@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:socially/views/auth_views/register_screen.dart';
 import 'package:socially/views/responsive/mobile_layout.dart';
 import 'package:socially/views/responsive/responsive_layout.dart';
 import 'package:socially/views/responsive/web_layout.dart';
 
 class RouterClass {
   final router = GoRouter(
-    initialLocation: "/",
+    initialLocation: "/register",
     errorPageBuilder: (context, state) {
       return MaterialPage(
         child: Scaffold(body: Center(child: Text('this page is not found'))),
@@ -22,6 +23,12 @@ class RouterClass {
             webLayout: WebLayout(),
           );
         },
+      ),
+
+      GoRoute(
+        path: "/register",
+        name: "register_screen",
+        builder: (context, state) => RegisterScreen(),
       ),
     ],
   );

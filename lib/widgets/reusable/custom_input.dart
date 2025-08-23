@@ -33,6 +33,7 @@ class CustomInput extends StatelessWidget {
         enabledBorder: border,
         label: Text(labelText, style: TextStyle(color: mainWhiteColor),),
         filled: true,
+        prefixIcon: Icon(icon),
       ),
       obscureText: isObsecure,
       validator: validator,
