@@ -1,6 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:socially/utils/constants/colors.dart';
 import 'package:socially/widgets/reusable/custom_button.dart';
 import 'package:socially/widgets/reusable/custom_input.dart';
@@ -23,6 +24,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   File? _imageFile;
+
+  Future<void> _pickImage(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: source);
+    if (pickedImage != null) {
+      setState(() {
+        _imageFile = File(pickedImage.path);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +71,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               bottom: -10,
                               left: 75,
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  _pickImage(ImageSource.gallery);
+                                },
                                 icon: Icon(Icons.add_a_photo),
                               ),
                             ),
@@ -151,6 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       TextButton(
                         onPressed: () {
+                          GoRouter.of(context).go("/login");
                         },
                         child: const Text(
                           'Already have an account? Log in',
